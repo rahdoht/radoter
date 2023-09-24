@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 import TextField from '@/components/TextField'
@@ -12,7 +12,8 @@ interface Trait {
 }
 
 function WassieComponent(): JSX.Element {
-  const [number, setNumber] = useState<string | null>(null)
+  const [number, setNumber] = useState<number | null>(null)
+  const [prev, setPrev] = useState<number | null>(null)
   const [wassieSrc, setWassieSrc] = useState<string>('/loomlock_8921.png')
   const [traits, setTraits] = useState<Trait[]>([])
   const [platitude, setPlatitude] = useState<string>('')
@@ -20,10 +21,48 @@ function WassieComponent(): JSX.Element {
     'looks rare',
     'excuse me ser this is one of a kind',
     'omg is this yours?',
-    // Add the rest of your platitudes here
+    "they're all good wassies, brent",
+    'all wassies are rare',
+    '1 wassie = 1 wassie',
+    'you found a unique wassie!',
+    'kill this rare wassie immediately',
+    'perfect for wassie soup',
+    "i think loomdart's mom wanted this one",
+    'this wassie would look good under a rug',
+    'so much lucky',
+    'there can be only one',
+    'ay imma i lan boi',
+    'pump it loomdart',
+    'probably nothing',
   ]
 
-  const fetchTraits = async (number: string | null): Promise<void> => {
+  // useEffect(() => {
+  //   fetchTraits(number, prev)
+  // }, [number, prev])
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        fetchTraits(number, prev)
+      }
+    }
+
+    const handleBlur = () => {
+      fetchTraits(number, prev)
+    }
+
+    document.addEventListener('keydown', handleKeyPress)
+    window.addEventListener('blur', handleBlur)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress)
+      window.removeEventListener('blur', handleBlur)
+    }
+  }, [number, prev])
+
+  const fetchTraits = async (
+    number: number | null,
+    prev: number | null,
+  ): Promise<void> => {
     if (number !== prev) {
       const wassieSrc = `https://arweave.net/ABckdetHKeV8VgUoIZ53TMDKkTi56LhTf-Gb1Mdqx9c/${number}.png`
       setWassieSrc(wassieSrc)
@@ -37,6 +76,7 @@ function WassieComponent(): JSX.Element {
         const data: { attributes: Trait[] } = await response.json()
         setTraits(data.attributes)
         randomPlatitude()
+        setPrev(number)
       } catch (error) {
         console.error('Error fetching data:', error)
       }
@@ -48,26 +88,20 @@ function WassieComponent(): JSX.Element {
     setPlatitude(platitudes[num])
   }
 
-  const prev: string | null = null // You can use state or useRef for this purpose
-
   return (
     <div className="text-center">
-      <TextField
-        label=""
-        value={number || ''}
-        onChange={(e) => setNumber(e.target.value)}
-      />
-      <button
-        onClick={() => {
-          fetchTraits(number)
-        }}
-      >
-        Get Wassie
-      </button>
+      <div className="flex">
+        <TextField
+          label=""
+          value={number || ''}
+          setNumber={(e) => setNumber(e.target.value)}
+          fetchTraits={() => fetchTraits(number, prev)}
+        />
+      </div>
       {platitude !== '' && (
         <div className="text-center">
           <h1>
-            <span style={{ color: 'gray' }}>Rank</span> 1
+            <span style={{ color: 'gray' }}>Rank</span> 1&nbsp;
             <span style={{ color: 'gray' }}>of</span> 12345
           </h1>
           {platitude}
@@ -76,9 +110,9 @@ function WassieComponent(): JSX.Element {
       <Image
         src={wassieSrc}
         alt="wassie"
-        width={200}
+        width={300}
         height={300}
-        className="text-center"
+        className="center"
       />
       {platitude !== '' && (
         <div className="text-center">

@@ -13,8 +13,8 @@ function App() {
         <Image
           src="/loomlock_8921.png"
           alt="Wassie 8921"
-          width={200}
-          height={24}
+          width={300}
+          height={300}
           priority
         />
       </div>

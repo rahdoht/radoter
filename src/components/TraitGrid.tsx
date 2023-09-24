@@ -22,8 +22,10 @@ const TraitGrid: React.FC<TraitGridProps> = ({ traits }) => {
         <tbody>
           {traits.map((trait) => (
             <tr key={trait.trait_type}>
-              <td className="border px-2 py-1">{trait.trait_type}</td>
-              <td className="border px-2 py-1">{trait.value}</td>
+              <td className="border-b text-left px-2 py-1">
+                {trait.trait_type}
+              </td>
+              <td className="border-b text-right px-2 py-1">{trait.value}</td>
             </tr>
           ))}
         </tbody>
