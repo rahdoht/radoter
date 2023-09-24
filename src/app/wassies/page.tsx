@@ -1,6 +1,6 @@
-import React from 'react';
-import Link from 'next/link';
-import WassieComponent from '@/components/Wassie';
+import React from 'react'
+import Link from 'next/link'
+import WassieComponent from '@/components/Wassie'
 
 function WassiePage() {
   return (
@@ -8,7 +8,7 @@ function WassiePage() {
       <Link href="/">home</Link>
       <WassieComponent />
     </div>
-  );
+  )
 }
 
-export default WassiePage;
+export default WassiePage

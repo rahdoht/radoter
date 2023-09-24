@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
-import Link from 'next/link';
-import Image from "next/image";
+import Link from 'next/link'
+import Image from 'next/image'
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
       </div>
       <Link href="/wassies">wassies</Link>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

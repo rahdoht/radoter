@@ -1,15 +1,17 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react'
 
 interface TextFieldProps {
-  label: string;
-  value: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  label: string
+  value: string
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 const TextField: React.FC<TextFieldProps> = ({ label, value, onChange }) => {
   return (
     <div className="mb-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2">{label}</label>
+      <label className="block text-gray-700 text-sm font-bold mb-2">
+        {label}
+      </label>
       <input
         type="number"
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -18,7 +20,7 @@ const TextField: React.FC<TextFieldProps> = ({ label, value, onChange }) => {
         placeholder="Enter your wassie's number"
       />
     </div>
-  );
-};
+  )
+}
 
-export default TextField;
+export default TextField

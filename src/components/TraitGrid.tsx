@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 
 interface Trait {
-  trait_type: string;
-  value: string;
+  trait_type: string
+  value: string
 }
 
 interface TraitGridProps {
-  traits: Trait[];
+  traits: Trait[]
 }
 
 const TraitGrid: React.FC<TraitGridProps> = ({ traits }) => {
@@ -29,7 +29,7 @@ const TraitGrid: React.FC<TraitGridProps> = ({ traits }) => {
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
-export default TraitGrid;
+export default TraitGrid
